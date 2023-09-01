@@ -1,0 +1,53 @@
+{
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#6f9d6e",
+    "activityBar.activeBorder": "#5a5b85",
+    "activityBar.background": "#6f9d6e",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#5a5b85",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "sash.hoverBorder": "#6f9d6e",
+    "statusBar.background": "#588157",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#6f9d6e",
+    "statusBarItem.remoteBackground": "#588157",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "titleBar.activeBackground": "#588157",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#58815799",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "peacock.color": "#588157",
+  "liveServer.settings.root": "/dist/public/",
+  "liveServer.settings.donotShowInfoMsg": true,
+  "liveServer.settings.donotVerifyTags": true,
+  "editor.renderWhitespace": "all",
+  "editor.rulers": [80, 120],
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "files.trimTrailingWhitespace": true,
+  "javascript.validate.enable": false,
+  "javascript.format.enable": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "standard.enableGlobally": true,
+  "standard.autoFixOnSave": true,
+  "standard.usePackageJson": true,
+  "html.format.endWithNewline": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.eol": "\n",
+  "[ignore]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[properties]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[php]": {
+    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "DotJoshJohnson.xml"
+  }
+}

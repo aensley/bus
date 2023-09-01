@@ -1,0 +1,69 @@
+/* Common Theme Variables */
+
+$white: #fff;
+$gray-100: #f8f9fa;
+$gray-200: #ebebeb;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #888;
+$gray-700: #444;
+$gray-800: #303030;
+$gray-900: #222;
+$black: #000;
+
+// See /.github/CONTRIBUTING.md for full Color Palette
+
+$blue: #083d77;
+$indigo: #320e3b;
+$purple: #8d6b94;
+$pink: #922d50;
+$red: #ad343e;
+$orange: #dd614a;
+$yellow: #f6ae2d;
+$green: #588157;
+$teal: #084c61;
+$cyan: #06bee1;
+
+$primary: $cyan;
+$secondary: $gray-700;
+$success: $green;
+$info: $blue;
+$warning: $yellow;
+$danger: $red;
+$light: $gray-100;
+$dark: $gray-800;
+
+$min-contrast-ratio: 1.9;
+
+// Links
+
+$link-color: $primary;
+
+// Fonts
+
+$font-family-sans-serif: Lato, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+  sans-serif;
+$text-muted: $gray-600;
+
+// Tables
+
+$table-border-color: $gray-700;
+$table-bg-scale: 0;
+
+// Forms
+
+$input-bg: $white;
+$input-color: $gray-800;
+$input-group-addon-color: $gray-500;
+$input-group-addon-bg: $gray-700;
+$form-check-input-bg: $white;
+$form-file-button-color: $white;
+
+// Navs
+
+$nav-link-disabled-color: $gray-500;
+$nav-tabs-border-color: $gray-700;
+$nav-tabs-link-hover-border-color: $nav-tabs-border-color $nav-tabs-border-color transparent;
+$nav-tabs-link-active-color: $white;
+$nav-tabs-link-active-border-color: $nav-tabs-border-color $nav-tabs-border-color transparent;

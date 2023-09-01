@@ -1,0 +1,62 @@
+/* Custom CSS */
+
+.navbar-brand,
+.navbar-text,
+.navbar-text a {
+  color: $primary;
+}
+
+a:hover {
+  color: $yellow;
+}
+
+.dataTables_length,
+.dataTables_info {
+  float: left;
+}
+
+.dataTables_filter {
+  text-align: center !important;
+}
+
+.dt-overflow {
+  position: relative;
+  width: 100%;
+  &:before {
+    content: '&nbsp;';
+    visibility: hidden;
+  }
+  span {
+    position: absolute;
+    left: $table-cell-padding-x;
+    right: $table-cell-padding-x;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+}
+
+#copyMessage {
+  display: none;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: transparentize($black, 0.4);
+  z-index: 4;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  div {
+    cursor: default;
+    opacity: 1;
+  }
+}
+
+#copiedUrl {
+  text-decoration: underline;
+}

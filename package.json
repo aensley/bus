@@ -1,0 +1,53 @@
+{
+  "name": "bus",
+  "version": "1.0.0",
+  "description": "Basic URL Shortener",
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "bootstrap": "^5.1.3",
+    "datatables.net-bs5": "^1.12.1",
+    "jquery": "^3.6.0"
+  },
+  "devDependencies": {
+    "@cedx/gulp-php-minify": "^12.0.0",
+    "@prettier/plugin-php": "^0.18.8",
+    "del": "^6.0.0",
+    "gulp": "^4.0.2",
+    "gulp-cli": "^2.3.0",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-replace": "^1.1.3",
+    "gulp-sass": "^5.1.0",
+    "gulp-sourcemaps": "^v3.0.0",
+    "live-server": "^1.2.1",
+    "pre-commit": "^1.2.2",
+    "prettier": "^2.7.1",
+    "sass": "^1.49.9",
+    "standard": "^16.0.4",
+    "string-replace-loader": "^3.1.0",
+    "through2": "^4.0.2",
+    "vinyl-named": "^1.1.0",
+    "webpack-stream": "^7.0.0"
+  },
+  "pre-commit": [
+    "precommit-msg",
+    "test"
+  ],
+  "scripts": {
+    "precommit-msg": "echo Running pre-commit checks...",
+    "clean": "gulp clean",
+    "format": "prettier --write .",
+    "test": "standard src/dash/*.js && prettier --check .",
+    "build": "npm run clean && gulp",
+    "watch": "npm run build && gulp watch",
+    "start": "live-server dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aensley/bus"
+  },
+  "author": "aensley@users.noreply.github.com",
+  "license": "MIT",
+  "type": "module"
+}
