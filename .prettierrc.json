@@ -16,7 +16,5 @@
   "proseWrap": "preserve",
   "quoteProps": "as-needed",
   "requirePragma": false,
-  "vueIndentScriptAndStyle": false,
-  "phpVersion": "8.1",
-  "braceStyle": "1tbs"
+  "vueIndentScriptAndStyle": false
 }

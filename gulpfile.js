@@ -10,7 +10,6 @@ import through from 'through2'
 import named from 'vinyl-named'
 import webpack from 'webpack-stream'
 import replace from 'gulp-replace'
-import phpMinify from '@cedx/gulp-php-minify'
 const sass = gulpSass(dartSass)
 let packageJson
 let envJson
@@ -63,13 +62,6 @@ async function getPackageInfo () {
 // Wipe the dist directory
 export async function clean () {
   return del(['dist/public/', 'dist/dash/', 'dist/*.php', 'dist/*.html'])
-}
-
-// Minify PHP
-async function php () {
-  return gulp.src(paths.root.php.src, { read: false })
-    .pipe(phpMinify({ silent: true }))
-    .pipe(gulp.dest(paths.root.php.dest))
 }
 
 // Minify HTML
@@ -158,7 +150,6 @@ async function img () {
 // Watch for changes
 function watchSrc () {
   console.warn('Watching for changes... Press [CTRL+C] to stop.')
-  gulp.watch(paths.root.php.src, php)
   gulp.watch(paths.root.html.src, html)
   gulp.watch(paths.public.scss.src, scssPublic)
   gulp.watch(paths.dash.scss.src, scssDash)
@@ -172,7 +163,6 @@ export default gulp.series(
   img,
   scssPublic,
   scssDash,
-  php,
   html
 )
 
