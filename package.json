@@ -1,7 +1,25 @@
 {
-  "name": "bus-cf",
+  "name": "@aensley/bus-cf",
   "version": "0.0.9",
   "description": "Basic URL Shortener for Cloudflare Pages",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aensley/bus-cf.git"
+  },
+  "author": {
+    "name": "Andrew Ensley",
+    "email": "aensley@users.noreply.github.com",
+    "url": "https://andrewensley.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aensley/bus-cf/issues/new?assignees=aensley&labels=bug%2Ctriage&template=bug-report.yml&title=%5BBug%5D%3A+"
+  },
+  "funding": [
+    "https://github.com/sponsors/aensley",
+    "https://paypal.me/AndrewEnsley"
+  ],
+  "homepage": "https://github.com/aensley/bus-cf#readme",
   "dependencies": {
     "@cloudflare/pages-plugin-cloudflare-access": "^1.0.3",
     "@cloudflare/pages-plugin-sentry": "^1.1.1",
@@ -35,7 +53,6 @@
     "gulp-sourcemaps": "^v3.0.0",
     "imagemin-svgo": "^10.0.1",
     "jest": "^29.6.4",
-    "jest-openapi": "^0.14.2",
     "jest-runner-groups": "^2.2.0",
     "live-server": "^1.2.2",
     "pre-commit": "^1.2.2",
@@ -66,14 +83,8 @@
     "start": "live-server dist",
     "integration-test": "jest --group=integration --verbose",
     "setup": "npm ci && npm run prepare-hook",
-    "prepare-hook": "echo 'exec < /dev/tty && node_modules/.bin/cz --hook || true' > .git/hooks/prepare-commit-msg && chmod +x .git/hooks/prepare-commit-msg"
+    "prepare-hook": "cp -a prepare-commit-msg .git/hooks/prepare-commit-msg && chmod +x .git/hooks/prepare-commit-msg"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/aensley/bus-cf"
-  },
-  "author": "aensley@users.noreply.github.com",
-  "license": "MIT",
   "type": "module",
   "release": {
     "branches": [
@@ -82,32 +93,12 @@
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
-      [
-        "@semantic-release/github",
-        {
-          "assets": [
-            {
-              "path": "src/openapi.yml",
-              "label": "Open API Spec"
-            }
-          ]
-        }
-      ],
-      "@semantic-release/npm",
-      [
-        "@aensley/semantic-release-openapi",
-        {
-          "apiSpecFiles": [
-            "src/openapi.yml"
-          ]
-        }
-      ],
+      "@semantic-release/github",
       [
         "@semantic-release/git",
         {
           "assets": [
-            "package.json",
-            "src/openapi.yml"
+            "package.json"
           ]
         }
       ]
