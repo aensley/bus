@@ -42,7 +42,14 @@ $link-color: $primary;
 
 // Fonts
 
-$font-family-sans-serif: Lato, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+$font-family-sans-serif:
+  Lato,
+  -apple-system,
+  BlinkMacSystemFont,
+  'Segoe UI',
+  Roboto,
+  'Helvetica Neue',
+  Arial,
   sans-serif;
 $text-muted: $gray-600;
 

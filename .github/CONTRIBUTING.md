@@ -1,25 +1,52 @@
 # Contributing
 
+# Contributing
+
+## Standards
+
+All code in this repository must pass [prettier](https://prettier.io/) linting and [ts-standard](https://github.com/standard/ts-standard). These standards are enforced by [`npm test`](#run-unit-tests), which in turn is a required pre-commit hook.
+
+Any contributions which do not pass the coding standards or unit tests will not be accepted.
+
+## Commit Messages
+
+Commit messages must follow the [Conventional Commits v1.0.0](https://www.conventionalcommits.org/en/v1.0.0/) standard.
+
+## Repository Layout
+
+| Folder    | Contents                    |
+| --------- | --------------------------- |
+| / (root)  | Project metadata files      |
+| /.github/ | GitHub metadata files       |
+| /.vscode/ | Visual Studio Code settings |
+| /src/     | Source code                 |
+| /tests/   | Unit and integration tests  |
+
 ## Style Guide
 
 See: <https://github.com/aensley/bus-assets>
 
 ## Setup
 
-### Pre-requisites
+This step will install dependencies and setup commit hooks.
 
-- You must have the latest Node.js LTS release installed
-- You must have PHP >=7.0
-
-### Install
-
-To install dependencies, open a terminal to the root of the repository and run:
-
-```ShellSession
-npm install
+```
+npm run setup
 ```
 
-### Build
+## Update
+
+```
+npm update
+```
+
+## Run Unit Tests
+
+```
+npm test
+```
+
+## Build
 
 To build the application, run:
 
@@ -27,7 +54,7 @@ To build the application, run:
 npm run build
 ```
 
-### Watch
+## Watch
 
 To automaticaly build the site when source files change (useful during development), run:
 
@@ -36,14 +63,6 @@ npm run watch
 ```
 
 The session can be ended by pressing `CTRL+C`.
-
-### Test
-
-To run tests, use:
-
-```ShellSession
-npm test
-```
 
 ### Format
 

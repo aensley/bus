@@ -16,7 +16,8 @@
     "titleBar.activeBackground": "#588157",
     "titleBar.activeForeground": "#e7e7e7",
     "titleBar.inactiveBackground": "#58815799",
-    "titleBar.inactiveForeground": "#e7e7e799"
+    "titleBar.inactiveForeground": "#e7e7e799",
+    "commandCenter.border": "#e7e7e799"
   },
   "peacock.color": "#588157",
   "liveServer.settings.root": "/dist/public/",
@@ -49,5 +50,8 @@
   },
   "[xml]": {
     "editor.defaultFormatter": "DotJoshJohnson.xml"
+  },
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
   }
 }

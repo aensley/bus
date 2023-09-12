@@ -1,6 +1,8 @@
 /.github/**/*.yml
 /.vscode/
+/coverage/
 /dist/
 /node_modules/
 /gulpfile.js
 /package-lock.json
+/src/_headers

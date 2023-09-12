@@ -1,7 +1,7 @@
 <h1 align="center">
 <img src="src/img/logo.svg" alt="BUS logo" height="196" width="400"><br/><br/>
 
-Basic URL Shortener for Cloudflare Pages, Functions, and D1
+Basic URL Shortener for Cloudflare Pages
 
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square)](https://standardjs.com)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://prettier.io)

@@ -1,23 +1,20 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{public-domain}} url shortener</title>
-    <link rel="icon" type="image/svg+xml" href="img/favicon.svg" />
-    <link rel="stylesheet" href="dash-light.css" media="(prefers-color-scheme:light)" />
-    <link rel="stylesheet" href="dash-dark.css" media="(prefers-color-scheme:dark)" />
-    <script defer src="app.js"></script>
+    @@include('meta.html')
+    <link rel="stylesheet" href="assets/css/dash-light.css" media="(prefers-color-scheme:light)" />
+    <link rel="stylesheet" href="assets/css/dash-dark.css" media="(prefers-color-scheme:dark)" />
+    <script defer src="assets/js/app.js"></script>
   </head>
   <body>
     <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
       <div class="container-xxl">
         <a class="navbar-brand" href="#">
-          <img src="img/favicon.svg" alt="" width="24" height="24" class="d-inline-block me-2" />
-          {{public-domain}}
+          <img src="assets/img/favicon.svg" alt="" width="24" height="24" class="d-inline-block me-2" />
+          {{domain}}
         </a>
         <div class="justify-content-end" id="navbarText">
-          <span class="navbar-text"> a <a href="https://github.com/aensley/bus">basic url shortener</a> </span>
+          <span class="navbar-text">@@include('attribution.html') </span>
         </div>
       </div>
     </nav>

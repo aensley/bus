@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Git hook for Commitizen
+
+(exec </dev/tty && node_modules/.bin/cz --hook) || true
