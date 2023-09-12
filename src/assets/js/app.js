@@ -101,12 +101,12 @@ const handleCopyClick = function (e) {
 const handleFormSubmit = (e) => {
   e.preventDefault()
   $.ajax({
-    url: 'create',
+    url: 'url',
     method: 'POST',
     dataType: 'json',
     data: {
-      s: $('#short').val(),
-      l: $('#long').val()
+      short: $('#short').val(),
+      long: $('#long').val()
     }
   })
     .done((d) => {
@@ -133,10 +133,10 @@ const handleDeleteClick = function () {
 const handleConfirmDeleteClick = function () {
   dcModal.hide()
   $.ajax({
-    url: 'delete',
-    method: 'POST',
+    url: 'url',
+    method: 'DELETE',
     dataType: 'json',
-    data: { s: $(this).data('short') }
+    data: { short: $(this).data('short') }
   })
     .done((d) => {
       setStatus(d)
@@ -149,7 +149,7 @@ const handleConfirmDeleteClick = function () {
 
 const setupDataTable = () => {
   listTable = $('#list').DataTable({
-    ajax: 'read',
+    ajax: 'url',
     columns: [{ data: 's' }, { data: 'l' }, { data: 'c' }],
     columnDefs: [
       {

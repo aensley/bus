@@ -5,8 +5,10 @@ Basic URL Shortener for Cloudflare Pages
 
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square)](https://standardjs.com)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://prettier.io)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/aensley/bus-cf?style=flat-square)
-[![GitHub Workflow Status (main)](https://img.shields.io/github/workflow/status/aensley/bus-cf/ci/main?style=flat-square)](https://github.com/aensley/bus/actions/workflows/ci.yml?query=branch%3Amain)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/aensley/bus-cf?style=flat-square)<br/>
+[![GitHub Workflow Status (main)](https://img.shields.io/github/actions/workflow/status/aensley/bus-cf/ci.yml?branch=main&style=flat-square)](https://github.com/aensley/bus-cf/actions/workflows/ci.yml?query=branch%3Amain)
+[![Maintainability](https://api.codeclimate.com/v1/badges/f62e1c65c78301dea6f8/maintainability)](https://codeclimate.com/github/aensley/bus-cf/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/f62e1c65c78301dea6f8/test_coverage)](https://codeclimate.com/github/aensley/bus-cf/test_coverage)
 
 </h1>
 
