@@ -1,10 +1,12 @@
+/* global location */
+
 import $ from 'jquery'
 import 'datatables.net-bs5'
 import { Modal } from 'bootstrap'
 import { library, icon } from '@fortawesome/fontawesome-svg-core'
 import { faTrashCan, faPlay } from '@fortawesome/free-solid-svg-icons'
 
-const publicDomain = '{{public-domain}}'
+const publicDomain = location.hostname
 library.add(faTrashCan, faPlay)
 
 const play = icon({ prefix: 'fas', iconName: 'play' }).html

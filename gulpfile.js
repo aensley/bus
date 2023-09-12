@@ -1,9 +1,11 @@
 import gulp from 'gulp'
-import del from 'del'
+import { deleteSync } from 'del'
+import fileinclude from 'gulp-file-include'
 import htmlmin from 'gulp-htmlmin'
-import dartSass from 'sass'
+import * as dartSass from 'sass'
 import gulpSass from 'gulp-sass'
 import imagemin from 'gulp-imagemin'
+import imageminSvgo from 'imagemin-svgo'
 import sourcemaps from 'gulp-sourcemaps'
 import fs from 'fs'
 import through from 'through2'
@@ -12,63 +14,48 @@ import webpack from 'webpack-stream'
 import replace from 'gulp-replace'
 const sass = gulpSass(dartSass)
 let packageJson
-let envJson
 
 const paths = {
-  root: {
-    php: {
-      src: 'src/**/*.php',
-      dest: 'dist/'
-    },
-    html: {
-      src: 'src/*.html',
-      dest: 'dist/'
-    },
-    img: {
-      src: 'src/img/*'
-    }
+  html: {
+    src: 'src/*.html',
+    dest: 'dist/'
   },
-  public: {
-    img: {
-      dest: 'dist/public/img/'
-    },
-    scss: {
-      src: 'src/*.scss',
-      dest: 'dist/public/'
-    }
+  htmlinclude: 'src/include/*.html',
+  img: {
+    src: 'src/assets/img/*',
+    dest: 'dist/assets/img/'
   },
-  dash: {
-    js: {
-      src: 'src/dash/app.js',
-      dest: 'dist/dash/'
-    },
-    img: {
-      dest: 'dist/dash/img/'
-    },
-    scss: {
-      src: ['src/*.scss', 'src/dash/*.scss'],
-      dest: 'dist/dash/'
-    }
+  js: {
+    src: 'src/assets/js/app.js',
+    dest: 'dist/assets/js/'
+  },
+  scss: {
+    src: 'src/assets/scss/*.scss',
+    dest: 'dist/assets/css/'
   }
 }
 
 // Get Package information from package.json
 async function getPackageInfo () {
   packageJson = JSON.parse(fs.readFileSync('package.json'))
-  envJson = JSON.parse(fs.readFileSync('dist/.env.json'))
   return Promise.resolve()
 }
 
 // Wipe the dist directory
 export async function clean () {
-  return del(['dist/public/', 'dist/dash/', 'dist/*.php', 'dist/*.html'])
+  return deleteSync(['dist/'])
 }
 
 // Minify HTML
 async function html () {
-  return gulp.src(paths.root.html.src)
-    .pipe(replace('{{public-domain}}', envJson['public-domain']))
-    .pipe(replace('{{link-to-dash}}', (envJson['link-to-dash'] ? '<a href="https://' + envJson['dash-domain'] + '">Manage</a>' : '')))
+  return gulp.src(paths.html.src)
+    .pipe(fileinclude({ prefix: '@@', basepath: 'src/include/' }))
+    .pipe(replace('{{commit-hash}}', process.env.CF_PAGES_COMMIT_SHA))
+    .pipe(replace('{{branch-name}}', process.env.CF_PAGES_BRANCH))
+    .pipe(replace('{{environment}}', process.env.CF_PAGES_BRANCH === 'main' ? 'production' : 'development'))
+    .pipe(replace('{{sentry-dsn}}', process.env.SENTRY_DSN))
+    .pipe(replace('{{domain}}', process.env.CF_PAGES_URL))
+    .pipe(replace('{{link-to-dash}}', (process.env.LINK_TO_DASH ? '<a href="dash">Manage</a>' : '')))
     .pipe(replace('{{package-name}}', packageJson.name))
     .pipe(replace('{{package-version}}', packageJson.version))
     .pipe(
@@ -85,12 +72,12 @@ async function html () {
         removeStyleLinkTypeAttributes: true
       })
     )
-    .pipe(gulp.dest(paths.root.html.dest))
+    .pipe(gulp.dest(paths.html.dest))
 }
 
 // Minify JavaScript
 async function js () {
-  return gulp.src(paths.dash.js.src)
+  return gulp.src(paths.js.src)
     .pipe(named())
     .pipe(
       webpack({
@@ -103,7 +90,11 @@ async function js () {
               loader: 'string-replace-loader',
               options: {
                 multiple: [
-                  { search: '{{public-domain}}', replace: envJson['public-domain'] },
+                  { search: '{{commit-hash}}', replace: process.env.CF_PAGES_COMMIT_SHA },
+                  { search: '{{branch-name}}', replace: process.env.CF_PAGES_BRANCH },
+                  { search: '{{environment}}', replace: process.env.CF_PAGES_BRANCH === 'main' ? 'production' : 'development' },
+                  { search: '{{sentry-dsn}}', replace: process.env.SENTRY_DSN },
+                  { search: '{{domain}}', replace: process.env.CF_PAGES_URL },
                   { search: '{{package-name}}', replace: packageJson.name },
                   { search: '{{package-version}}', replace: packageJson.version }
                 ]
@@ -124,45 +115,37 @@ async function js () {
       })
     )
     .pipe(sourcemaps.write('.', { addComment: false }))
-    .pipe(gulp.dest(paths.dash.js.dest))
+    .pipe(gulp.dest(paths.js.dest))
 }
 
 // Compile SCSS
-async function scssPublic () {
-  return gulp.src(paths.public.scss.src)
-    .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
-    .pipe(gulp.dest(paths.public.scss.dest))
-}
-async function scssDash () {
-  return gulp.src(paths.dash.scss.src)
-    .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
-    .pipe(gulp.dest(paths.dash.scss.dest))
+async function scss () {
+  return gulp.src(paths.scss.src)
+    .pipe(sass({ outputStyle: 'compressed' }))
+    .pipe(gulp.dest(paths.scss.dest))
 }
 
 // Compress images
 async function img () {
-  return gulp.src(paths.root.img.src)
-    .pipe(imagemin([imagemin.svgo()]))
-    .pipe(gulp.dest(paths.public.img.dest))
-    .pipe(gulp.dest(paths.dash.img.dest))
+  return gulp.src(paths.img.src)
+    .pipe(imagemin([imageminSvgo()]))
+    .pipe(gulp.dest(paths.img.dest))
 }
 
 // Watch for changes
 function watchSrc () {
   console.warn('Watching for changes... Press [CTRL+C] to stop.')
-  gulp.watch(paths.root.html.src, html)
-  gulp.watch(paths.public.scss.src, scssPublic)
-  gulp.watch(paths.dash.scss.src, scssDash)
-  gulp.watch(paths.root.img.src, img)
-  gulp.watch(paths.dash.js.src, js)
+  gulp.watch([paths.html.src, paths.htmlinclude], html)
+  gulp.watch(paths.scss.src, scss)
+  gulp.watch(paths.img.src, img)
+  gulp.watch(paths.js.src, js)
 }
 
 export default gulp.series(
   getPackageInfo,
   js,
   img,
-  scssPublic,
-  scssDash,
+  scss,
   html
 )
 
