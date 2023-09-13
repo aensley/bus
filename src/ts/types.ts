@@ -17,3 +17,13 @@ export interface CreateUrlFormData {
 export interface DeleteUrlFormData {
   short: string
 }
+
+export interface UrlDatatableResponse {
+  data: UrlDatatableRow[]
+}
+
+interface UrlDatatableRow {
+  s: string
+  l: string
+  c: number
+}
