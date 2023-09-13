@@ -10,12 +10,8 @@ import { DEFAULT_SHORT_CODE_LENGTH, RESERVED_CODES } from './const'
  * @param {any}    [context] The request context.
  * @returns {Promise<string>} The short code.
  */
-export const generateShortCode = async function (long: string, context?: any): Promise<string> {
-  const shortCodeLength: number =
-    context != null
-      ? ((await context.env.default.get('SHORT_CODE_LENGTH')) as number) ?? DEFAULT_SHORT_CODE_LENGTH
-      : DEFAULT_SHORT_CODE_LENGTH
-
+export const generateShortCode = async function (long: string, shortCodeEnvLength?: number): Promise<string> {
+  const shortCodeLength: number = shortCodeEnvLength != null ? shortCodeEnvLength : DEFAULT_SHORT_CODE_LENGTH
   return bytesToHex(blake3(long)).substring(0, shortCodeLength)
 }
 

@@ -64,7 +64,7 @@ const setSelectors = () => {
   })
 }
 
-const getShortUrlA = (short, copy) => {
+const getShortUrl = (short, copy) => {
   return (
     '<a' +
     (copy ? ' title="Copy Short URL"' : '') +
@@ -80,7 +80,7 @@ const getShortUrlA = (short, copy) => {
   )
 }
 
-const getLongUrlA = (long, copy) => {
+const getLongUrl = (long, copy) => {
   return '<a' + (copy ? ' class="copy" title="Copy Long URL"' : '') + ' href="' + long + '">' + long + '</a>'
 }
 
@@ -124,8 +124,8 @@ const updateTable = () => {
 
 const handleDeleteClick = function () {
   const data = listTable.row($(this).parents('tr')[0]).data()
-  $deleteConfirmShort.html(getShortUrlA(data.s, false))
-  $deleteConfirmLong.html(getLongUrlA(data.l, false))
+  $deleteConfirmShort.html(getShortUrl(data.s, false))
+  $deleteConfirmLong.html(getLongUrl(data.l, false))
   dcModal.show()
   $deleteConfirmButton.data('short', data.s)
 }
@@ -157,7 +157,7 @@ const setupDataTable = () => {
         className: 'text-nowrap',
         render: (data, type) => {
           if (type === 'display') {
-            return getShortUrlA(data, true)
+            return getShortUrl(data, true)
           }
 
           return data
@@ -168,7 +168,7 @@ const setupDataTable = () => {
         className: 'dt-overflow align-middle',
         render: (data, type) => {
           if (type === 'display') {
-            return '<span>' + getLongUrlA(data, true) + '</span>'
+            return '<span>' + getLongUrl(data, true) + '</span>'
           }
 
           return data

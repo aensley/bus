@@ -1,4 +1,4 @@
-import { Env, CreateUrlFormData, UrlRow, DeleteUrlFormData } from '../src/ts/types'
+import { Env, CreateUrlFormData, UrlRow, DeleteUrlFormData, UrlDatatableResponse } from '../src/ts/types'
 import { createUrl, deleteUrl, getRowByLongUrl, getRowByShortCode, getUrls } from '../src/ts/data'
 import { DEFAULT_RESPONSE_HEADERS } from '../src/ts/const'
 import { generateShortCode, isValidShortCode, isValidUrl } from '../src/ts/url'
@@ -11,7 +11,7 @@ import { convertFormDataToJson } from '../src/ts/form'
  * @returns {Promise<Response>} Response object.
  */
 export const onRequestGet: PagesFunction<Env> = async function (context) {
-  const output = { data: [{}] }
+  const output: UrlDatatableResponse = { data: [] }
   const allRows: UrlRow[] = await getUrls(context)
   for (const row of allRows) {
     output.data.push({ s: row.short, l: row.long, c: row.created })
@@ -110,7 +110,11 @@ export const onRequestPost: PagesFunction<Env> = async function (context) {
     let count = 0
     do {
       const toShorten = requestDetails.long + (count > 0 ? count.toString() : '')
-      requestDetails.short = await generateShortCode(toShorten, context)
+      const shortCodeEnvLength = context.env.SHORT_CODE_LENGTH
+      requestDetails.short = await generateShortCode(
+        toShorten,
+        shortCodeEnvLength != null ? parseInt(shortCodeEnvLength) : undefined
+      )
       // Make sure the auto-generated short code does not collide with an existing record.
       shortRow = await getRowByShortCode(requestDetails.short, context)
       count++

@@ -1,6 +1,7 @@
 export interface Env {
   URLKV: KVNamespace
   URLD1: D1Database
+  SHORT_CODE_LENGTH: string
 }
 
 export interface UrlRow {
@@ -16,4 +17,14 @@ export interface CreateUrlFormData {
 
 export interface DeleteUrlFormData {
   short: string
+}
+
+export interface UrlDatatableResponse {
+  data: UrlDatatableRow[]
+}
+
+interface UrlDatatableRow {
+  s: string
+  l: string
+  c: number
 }
