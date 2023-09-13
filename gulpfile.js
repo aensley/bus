@@ -14,6 +14,7 @@ import webpack from 'webpack-stream'
 import replace from 'gulp-replace'
 const sass = gulpSass(dartSass)
 let packageJson
+let domain
 
 const paths = {
   html: {
@@ -29,6 +30,10 @@ const paths = {
     src: 'src/assets/js/app.js',
     dest: 'dist/assets/js/'
   },
+  json: {
+    src: 'src/*.json',
+    dest: 'dist/'
+  },
   scss: {
     src: 'src/assets/scss/*.scss',
     dest: 'dist/assets/css/'
@@ -36,26 +41,32 @@ const paths = {
 }
 
 // Get Package information from package.json
-async function getPackageInfo () {
+async function getPackageInfo() {
   packageJson = JSON.parse(fs.readFileSync('package.json'))
+  domain = process.env.DOMAIN || ''
+  if (domain.startsWith('https://')) {
+    domain = domain.substring(8)
+  }
+
   return Promise.resolve()
 }
 
 // Wipe the dist directory
-export async function clean () {
+export async function clean() {
   return deleteSync(['dist/'])
 }
 
 // Minify HTML
-async function html () {
-  return gulp.src(paths.html.src)
+async function html() {
+  return gulp
+    .src(paths.html.src)
     .pipe(fileinclude({ prefix: '@@', basepath: 'src/include/' }))
     .pipe(replace('{{commit-hash}}', process.env.CF_PAGES_COMMIT_SHA))
     .pipe(replace('{{branch-name}}', process.env.CF_PAGES_BRANCH))
     .pipe(replace('{{environment}}', process.env.CF_PAGES_BRANCH === 'main' ? 'production' : 'development'))
     .pipe(replace('{{sentry-dsn}}', process.env.SENTRY_DSN))
-    .pipe(replace('{{domain}}', process.env.CF_PAGES_URL))
-    .pipe(replace('{{link-to-dash}}', (process.env.LINK_TO_DASH ? '<a href="dash">Manage</a>' : '')))
+    .pipe(replace('{{domain}}', domain))
+    .pipe(replace('{{link-to-dash}}', process.env.LINK_TO_DASH ? '<a href="dash">Manage</a>' : ''))
     .pipe(replace('{{package-name}}', packageJson.name))
     .pipe(replace('{{package-version}}', packageJson.version))
     .pipe(
@@ -76,8 +87,9 @@ async function html () {
 }
 
 // Minify JavaScript
-async function js () {
-  return gulp.src(paths.js.src)
+async function js() {
+  return gulp
+    .src(paths.js.src)
     .pipe(named())
     .pipe(
       webpack({
@@ -92,9 +104,12 @@ async function js () {
                 multiple: [
                   { search: '{{commit-hash}}', replace: process.env.CF_PAGES_COMMIT_SHA },
                   { search: '{{branch-name}}', replace: process.env.CF_PAGES_BRANCH },
-                  { search: '{{environment}}', replace: process.env.CF_PAGES_BRANCH === 'main' ? 'production' : 'development' },
+                  {
+                    search: '{{environment}}',
+                    replace: process.env.CF_PAGES_BRANCH === 'main' ? 'production' : 'development'
+                  },
                   { search: '{{sentry-dsn}}', replace: process.env.SENTRY_DSN },
-                  { search: '{{domain}}', replace: process.env.CF_PAGES_URL },
+                  { search: '{{domain}}', replace: domain },
                   { search: '{{package-name}}', replace: packageJson.name },
                   { search: '{{package-version}}', replace: packageJson.version }
                 ]
@@ -119,21 +134,28 @@ async function js () {
 }
 
 // Compile SCSS
-async function scss () {
-  return gulp.src(paths.scss.src)
+async function scss() {
+  return gulp
+    .src(paths.scss.src)
     .pipe(sass({ outputStyle: 'compressed' }))
     .pipe(gulp.dest(paths.scss.dest))
 }
 
+// Move JSON
+async function json() {
+  return gulp.src(paths.json.src).pipe(gulp.dest(paths.json.dest))
+}
+
 // Compress images
-async function img () {
-  return gulp.src(paths.img.src)
+async function img() {
+  return gulp
+    .src(paths.img.src)
     .pipe(imagemin([imageminSvgo()]))
     .pipe(gulp.dest(paths.img.dest))
 }
 
 // Watch for changes
-function watchSrc () {
+function watchSrc() {
   console.warn('Watching for changes... Press [CTRL+C] to stop.')
   gulp.watch([paths.html.src, paths.htmlinclude], html)
   gulp.watch(paths.scss.src, scss)
@@ -141,12 +163,6 @@ function watchSrc () {
   gulp.watch(paths.js.src, js)
 }
 
-export default gulp.series(
-  getPackageInfo,
-  js,
-  img,
-  scss,
-  html
-)
+export default gulp.series(getPackageInfo, js, img, scss, json, html)
 
 export const watch = gulp.series(getPackageInfo, watchSrc)

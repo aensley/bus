@@ -113,7 +113,8 @@
   "ts-standard": {
     "globals": [],
     "ignore": [
-      "/tests/**/*.ts"
+      "/tests/**/*.ts",
+      "/gulpfile.js"
     ]
   },
   "prettier": {

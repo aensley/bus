@@ -57,10 +57,11 @@ Configuration is performed through Cloudflare Pages' Environment variables.
 
 ### Settings
 
-| Environment Variable | Required | Default | Description                                                |
-| -------------------- | -------- | ------- | ---------------------------------------------------------- |
-| `short-code-length`  | No       | 4       | The length to use for automatically generated short-codes. |
-| `link-to-dash`       | No       | false   | Set to true to show a link to your                         |
+| Environment Variable | Required | Default | Description                                                                           |
+| -------------------- | -------- | ------- | ------------------------------------------------------------------------------------- |
+| `DOMAIN`             | **YES**  |         | The domain for your URL shortener. This will be used as the base for your short URLs. |
+| `SHORT_CODE_LENGTH`  | No       | 4       | The length to use for automatically generated short-codes.                            |
+| `LINK_TO_DASH`       | No       | false   | Set to true to show a link to your dashboard on the public home page.                 |
 
 ## Application Data
 
