@@ -1,6 +1,7 @@
 export interface Env {
   URLKV: KVNamespace
   URLD1: D1Database
+  SHORT_CODE_LENGTH: string
 }
 
 export interface UrlRow {

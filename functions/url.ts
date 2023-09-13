@@ -110,7 +110,11 @@ export const onRequestPost: PagesFunction<Env> = async function (context) {
     let count = 0
     do {
       const toShorten = requestDetails.long + (count > 0 ? count.toString() : '')
-      requestDetails.short = await generateShortCode(toShorten, context)
+      const shortCodeEnvLength = context.env.SHORT_CODE_LENGTH
+      requestDetails.short = await generateShortCode(
+        toShorten,
+        shortCodeEnvLength != null ? parseInt(shortCodeEnvLength) : undefined
+      )
       // Make sure the auto-generated short code does not collide with an existing record.
       shortRow = await getRowByShortCode(requestDetails.short, context)
       count++
