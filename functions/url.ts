@@ -44,6 +44,12 @@ export const onRequestPost: PagesFunction<Env> = async function (context) {
     environment: headers.get('host')
   }
 
+  return new Response(JSON.stringify(requestDetails), {
+    status: 200,
+    headers: DEFAULT_RESPONSE_HEADERS
+  })
+
+  /*
   // Make sure at least the long URL was supplied.
   if (requestDetails.long.length < 1) {
     return new Response(JSON.stringify({ action: 'create', status: 'error', message: 'Insufficient data supplied' }), {
@@ -154,6 +160,7 @@ export const onRequestPost: PagesFunction<Env> = async function (context) {
     status: returnStatus,
     headers: DEFAULT_RESPONSE_HEADERS
   })
+*/
 }
 
 /**
