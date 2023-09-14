@@ -16,6 +16,8 @@ Basic URL Shortener for Cloudflare Pages
 
 The simplest of URL shorteners. No analytics. No complex installation.
 
+Built on Cloudflare's blazing fast global network.
+
 ### Features
 
 - Extremely light-weight (public site is <4KB)
@@ -32,37 +34,16 @@ For screenshots of the dashboard, [check out the Wiki](https://github.com/aensle
 
 ### Tech Stack
 
-- Server-side processing: Cloudflare Pages Functions
-- Configuration: Cloudflare Pages Environment Variables
-- Data storage: Cloudflare KV and D1
+- Server-side processing: Cloudflare Pages [Functions](https://developers.cloudflare.com/pages/platform/functions/)
+- Configuration: Cloudflare Pages [Environment Variables](https://developers.cloudflare.com/pages/platform/build-configuration/#environment-variables)
+- Data storage: Cloudflare [KV](https://developers.cloudflare.com/workers/runtime-apis/kv/) and [D1](https://developers.cloudflare.com/d1)
+- Authentication: Cloudflare [Access](https://developers.cloudflare.com/cloudflare-one/policies/access/)
 - Build System: Node.js
-
-## Pre-requisites
-
-- A domain for your short URLs, e.g. `example.com`
-- A Cloudflare account
-- Node.js
 
 ## Installation
 
-TBA
+For installation and configuration instructions, please refer to the [Wiki](https://github.com/aensley/bus/wiki/Installation).
 
-### Authentication
+## Development
 
-TBA
-
-## Configuration
-
-Configuration is performed through Cloudflare Pages' Environment variables.
-
-### Settings
-
-| Environment Variable | Required | Default | Description                                                                           |
-| -------------------- | -------- | ------- | ------------------------------------------------------------------------------------- |
-| `DOMAIN`             | **YES**  |         | The domain for your URL shortener. This will be used as the base for your short URLs. |
-| `SHORT_CODE_LENGTH`  | No       | 4       | The length to use for automatically generated short-codes.                            |
-| `LINK_TO_DASH`       | No       | false   | Set to true to show a link to your dashboard on the public home page.                 |
-
-## Application Data
-
-Shortened URLs are stored in Cloudflare's D1 and KV storage systems.
+If you would like to customize the code or contribute to the project, please refer to the [Contributing guide](.github/CONTRIBUTING.md).

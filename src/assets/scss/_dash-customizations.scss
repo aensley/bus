@@ -60,3 +60,15 @@ a:hover {
 #copiedUrl {
   text-decoration: underline;
 }
+
+#list {
+  width: 100%;
+}
+
+input:valid {
+  border-color: $green;
+}
+
+input:invalid {
+  border-color: $red;
+}
