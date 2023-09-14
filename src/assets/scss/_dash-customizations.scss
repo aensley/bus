@@ -64,3 +64,11 @@ a:hover {
 #list {
   width: 100%;
 }
+
+input:valid {
+  border-color: $green;
+}
+
+input:invalid {
+  border-color: $red;
+}
