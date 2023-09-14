@@ -37,13 +37,13 @@ For screenshots of the dashboard, [check out the Wiki](https://github.com/aensle
 - Server-side processing: Cloudflare Pages [Functions](https://developers.cloudflare.com/pages/platform/functions/)
 - Configuration: Cloudflare Pages [Environment Variables](https://developers.cloudflare.com/pages/platform/build-configuration/#environment-variables)
 - Data storage: Cloudflare [KV](https://developers.cloudflare.com/workers/runtime-apis/kv/) and [D1](https://developers.cloudflare.com/d1)
+- Authentication: Cloudflare [Access](https://developers.cloudflare.com/cloudflare-one/policies/access/)
 - Build System: Node.js
-
-## Pre-requisites
-
-- A domain for your short URLs, e.g. `example.com`
-- A Cloudflare account
 
 ## Installation
 
 For installation and configuration instructions, please refer to the [Wiki](https://github.com/aensley/bus/wiki/Installation).
+
+## Development
+
+If you would like to customize the code or contribute to the project, please refer to the [Contributing guide](.github/CONTRIBUTING.md)
