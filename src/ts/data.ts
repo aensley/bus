@@ -89,19 +89,6 @@ export const getUrlCount = async function (
 }
 
 /**
- * Find a database row by long URL.
- *
- * @param {string} long    The long URL to search for.
- * @param {any}    context The request context.
- * @returns {Promise<UrlRow | null>} The row if found; null if not.
- */
-export const getRowByLongUrl = async function (long: string, context: any): Promise<UrlRow | null> {
-  const ps = context.env.URLD1.prepare('SELECT * FROM url WHERE long = ?1;').bind(long)
-  const row = await ps.first()
-  return row
-}
-
-/**
  * Find a database row by short code.
  *
  * @param {string} short   The short code to search for.

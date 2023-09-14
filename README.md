@@ -7,8 +7,8 @@ Basic URL Shortener for Cloudflare Pages
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://prettier.io)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/aensley/bus?style=flat-square)<br/>
 [![GitHub Workflow Status (main)](https://img.shields.io/github/actions/workflow/status/aensley/bus/ci.yml?branch=main&style=flat-square)](https://github.com/aensley/bus/actions/workflows/ci.yml?query=branch%3Amain)
-[![Maintainability](https://api.codeclimate.com/v1/badges/f62e1c65c78301dea6f8/maintainability)](https://codeclimate.com/github/aensley/bus/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/f62e1c65c78301dea6f8/test_coverage)](https://codeclimate.com/github/aensley/bus/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/6668fa5755091ffe6930/maintainability)](https://codeclimate.com/github/aensley/bus/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/6668fa5755091ffe6930/test_coverage)](https://codeclimate.com/github/aensley/bus/test_coverage)
 
 </h1>
 
