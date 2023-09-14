@@ -1,5 +1,5 @@
 import { Env, CreateUrlFormData, UrlRow, DeleteUrlFormData, UrlDatatableResponse } from '../src/ts/types'
-import { createUrl, deleteUrl, getRowByLongUrl, getRowByShortCode, getUrls } from '../src/ts/data'
+import { createUrl, deleteUrl, getRowByShortCode, getUrls } from '../src/ts/data'
 import { DEFAULT_RESPONSE_HEADERS } from '../src/ts/const'
 import { generateShortCode, isValidShortCode, isValidUrl } from '../src/ts/url'
 import { convertFormDataToJson } from '../src/ts/form'
@@ -64,21 +64,6 @@ export const onRequestPost: PagesFunction<Env> = async function (context) {
     )
   }
 
-  // Make sure the long URL isn't already shortened.
-  const longRow = await getRowByLongUrl(requestDetails.long, context)
-  if (longRow != null) {
-    return new Response(
-      JSON.stringify({
-        action: 'create',
-        status: 'success',
-        message: 'URL is already shortened',
-        short: longRow.short,
-        long: requestDetails.long
-      }),
-      { status: 200, headers: DEFAULT_RESPONSE_HEADERS }
-    )
-  }
-
   // Make sure the short code (if supplied) is valid and isn't already taken.
   if (requestDetails.short != null && requestDetails.short.length > 0) {
     if (!isValidShortCode(requestDetails.short)) {
@@ -106,6 +91,7 @@ export const onRequestPost: PagesFunction<Env> = async function (context) {
       )
     }
   } else {
+    // Generate a short code for the long URL
     let shortRow: UrlRow | null
     let count = 0
     do {
