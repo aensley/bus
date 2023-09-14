@@ -46,4 +46,4 @@ For installation and configuration instructions, please refer to the [Wiki](http
 
 ## Development
 
-If you would like to customize the code or contribute to the project, please refer to the [Contributing guide](.github/CONTRIBUTING.md)
+If you would like to customize the code or contribute to the project, please refer to the [Contributing guide](.github/CONTRIBUTING.md).
