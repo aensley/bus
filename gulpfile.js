@@ -26,6 +26,10 @@ const paths = {
     src: 'src/assets/img/*',
     dest: 'dist/assets/img/'
   },
+  cloudflareMeta: {
+    src: 'src/_*',
+    dest: 'dist/'
+  },
   js: {
     src: 'src/assets/js/app.js',
     dest: 'dist/assets/js/'
@@ -146,6 +150,11 @@ async function json() {
   return gulp.src(paths.json.src).pipe(gulp.dest(paths.json.dest))
 }
 
+// Copy Cloudflare Pages Meta Info
+async function cloudflareMeta(cb) {
+  return gulp.src(paths.cloudflareMeta.src).pipe(gulp.dest(paths.cloudflareMeta.dest))
+}
+
 // Compress images
 async function img() {
   return gulp
@@ -163,6 +172,6 @@ function watchSrc() {
   gulp.watch(paths.js.src, js)
 }
 
-export default gulp.series(getPackageInfo, js, img, scss, json, html)
+export default gulp.series(getPackageInfo, cloudflareMeta, js, img, scss, json, html)
 
 export const watch = gulp.series(getPackageInfo, watchSrc)
