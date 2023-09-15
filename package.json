@@ -1,6 +1,6 @@
 {
   "name": "@aensley/bus",
-  "version": "0.0.9",
+  "version": "1.0.0",
   "description": "Basic URL Shortener for Cloudflare Pages",
   "repository": {
     "type": "git",
